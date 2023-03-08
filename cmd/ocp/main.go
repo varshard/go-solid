@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var solvers map[string]solver.Solver
+var solvers = Solvers{}
 
 func main() {
 	game := getSolver(os.Args[1])
@@ -19,13 +19,14 @@ func display(output []string) {
 }
 
 func getSolver(name string) solver.Solver {
-	if s, ok := solvers[name]; ok {
+	if s, ok := solvers.Solvers[name]; ok {
 		return s
 	}
-	panic("unsupported solver")
+	panic("unsupported question")
 }
 
 func solve(q solver.Solver, input string) []string {
+	// Liskov Substitution, whatever is Solver, I accept
 	if err := q.SetInput(input); err != nil {
 		panic(err)
 	}
@@ -33,8 +34,10 @@ func solve(q solver.Solver, input string) []string {
 }
 
 func init() {
-	solvers = map[string]solver.Solver{
-		"fibonacci": &solver.Fibonacci{},
-		"fizzbuzz":  &solver.FizzBuzz{},
-	}
+	solvers.Solvers["fibonacci"] = &solver.Fibonacci{}
+	solvers.Solvers["fizzbuzz"] = &solver.FizzBuzz{}
+}
+
+type Solvers struct {
+	Solvers map[string]solver.Solver
 }
