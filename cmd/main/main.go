@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"strings"
 )
 
 func main() {
@@ -13,7 +12,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	var output []string
 	switch os.Args[1] {
 	case "fibonacci":
 		for a, b := 0, 1; a < num; a, b = b, a+b {
@@ -32,5 +30,4 @@ func main() {
 			}
 		}
 	}
-	fmt.Print(strings.Join(output, "\n"))
 }

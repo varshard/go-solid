@@ -14,6 +14,14 @@ func main() {
 	display(solve(game, os.Args[2]))
 }
 
+func solve(q solver.Solver, input string) []string {
+	// Liskov Substitution, whatever is Solver, I accept
+	if err := q.SetInput(input); err != nil {
+		panic(err)
+	}
+	return q.Solve()
+}
+
 func display(output []string) {
 	fmt.Print(strings.Join(output, "\n"))
 }
@@ -23,14 +31,6 @@ func getSolver(name string) solver.Solver {
 		return s
 	}
 	panic("unsupported question")
-}
-
-func solve(q solver.Solver, input string) []string {
-	// Liskov Substitution, whatever is Solver, I accept
-	if err := q.SetInput(input); err != nil {
-		panic(err)
-	}
-	return q.Solve()
 }
 
 func init() {
