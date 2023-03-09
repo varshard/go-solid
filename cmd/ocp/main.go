@@ -39,5 +39,6 @@ func init() {
 }
 
 type Solvers struct {
+	// Solver interface allow Solvers to not concern about its solvers
 	Solvers map[string]solver.Solver
 }

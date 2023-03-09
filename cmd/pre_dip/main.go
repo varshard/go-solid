@@ -34,6 +34,7 @@ func solve(question string, input string) []string {
 }
 
 type Solvers struct {
+	// Solvers need to know every supported Solver.
 	FiboSolver     *solver.Fibonacci
 	FizzBuzzSolver *solver.FizzBuzz
 }
